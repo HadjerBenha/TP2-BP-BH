@@ -12,26 +12,59 @@ import java.util.Objects;
 public class Auteur {
 
     public static final String INCONNU = "Inconnu";
+    public static final Pays PAYS_INCONNU = new Pays(INCONNU, "XXX");
 
     private String prenom = INCONNU;
     private String nom = INCONNU;
-    private String paysOrigine = INCONNU;
+    private Pays paysOrigine = PAYS_INCONNU;
 
-    public Auteur(String prenom, String nom, String paysOrigine) {
-        setPrenom(prenom);
-        setNom(nom);
-        setPaysOrigine(paysOrigine);
+//    public Auteur(String prenom, String nom, String paysOrigine) {
+//        setPrenom(prenom);
+//        setNom(nom);
+//        setPaysOrigine(paysOrigine);
+//    }
+
+
+    public Auteur(String prenom, String nom, Pays paysOrigine) {
+        this.prenom = prenom;
+        this.nom = nom;
+        this.paysOrigine = paysOrigine;
     }
 
     public Auteur() {
-        this(INCONNU, INCONNU, INCONNU);
+        this(INCONNU, INCONNU, PAYS_INCONNU);
     }
+
+//    public String getPrenom() {
+//        return prenom;
+//    }
+//
+//    private void setPrenom(String prenom) {
+//        this.prenom = prenom;
+//    }
+//
+//    public String getNom() {
+//        return nom;
+//    }
+//
+//    private void setNom(String nom) {
+//        this.nom = nom;
+//    }
+//
+//    public String getPaysOrigine() {
+//        return paysOrigine;
+//    }
+//
+//    private void setPaysOrigine(String paysOrigine) {
+//        this.paysOrigine = paysOrigine;
+//    }
+
 
     public String getPrenom() {
         return prenom;
     }
 
-    private void setPrenom(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
@@ -39,15 +72,16 @@ public class Auteur {
         return nom;
     }
 
-    private void setNom(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public String getPaysOrigine() {
+    public Pays getPaysOrigine() {
         return paysOrigine;
     }
 
-    private void setPaysOrigine(String paysOrigine) {
+    public void setPaysOrigine(Pays paysOrigine) {
+        assert paysOrigine != null : "Le pays d'origine ne peut pas être null.";
         this.paysOrigine = paysOrigine;
     }
 
