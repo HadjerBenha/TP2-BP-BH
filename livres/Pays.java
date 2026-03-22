@@ -1,5 +1,9 @@
 package livres;
 
+/**
+ * TP2-BP-BH
+ * Bediakon Prisca
+ */
 public class Pays {
     private String nom;
     private String code;
