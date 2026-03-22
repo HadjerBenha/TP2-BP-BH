@@ -5,8 +5,7 @@ import java.util.Objects;
 /**
  * Cours POO 1
  *
- * @author Julien.Brunet maj Jocelyn
- * @since H25
+ *TP2-BH-BP
  */
 
 public class Auteur {
