@@ -14,7 +14,7 @@ public class Serie {
     private String nom;
     private List<Ouvrage> ouvrages;
 
-    public Serie(String nom, List<Ouvrage> ouvrages) {
+    public Serie(String nom) {
         this.nom = nom;
         this.ouvrages = new ArrayList<>();
     }
