@@ -6,8 +6,6 @@ import java.util.List;
 import livres.Ouvrage;
 import livres.Auteur;
 import livres.Pays;
-import livres.Serie;
-
 
 /**
  * CoursPOO 1
@@ -26,10 +24,10 @@ public class TestOuvrage {
 
     public void testOuvrages() {
         //Deux auteurs deja prets pour les tests...
-        Auteur albertine = new Auteur("Albertine", "Tremblay", new Pays("Canada", "CAN"));
-        Auteur john = new Auteur("John", "Smith", new Pays("Etats-Unis", "USA"));
+        Auteur albertine = new Auteur("Albertine", "Tremblay", "Canada");
+        Auteur john = new Auteur("John", "Smith", "Etats-Unis");
 
-        //Voici une partie des tests. Il faut en ajouter, pour les fonctionnalités non testées
+        //Voici une partie des tests! Il faut en ajouter, pour les fonctionnalités non testées!
         System.out.println("-----Test des constructeurs d'ouvrage et des diverses validations-----------");
         Ouvrage livreA = new Ouvrage("Titre assez long", john);
         System.out.println(livreA);
@@ -38,7 +36,7 @@ public class TestOuvrage {
         Ouvrage livreC = new Ouvrage(null, john);
         System.out.println(livreC);
 
-        //bibliotheque.Auteur null et valeur par défaut de l'abibliotheque Auteur
+        //bibliotheque.Auteur null et valeur par défaut de l'bibliotheque.Auteur
         Ouvrage livreA1 = new Ouvrage("Titre assez long", null);
         System.out.println(livreA1);
         //bibliotheque.Auteur fonctionnel
@@ -60,7 +58,7 @@ public class TestOuvrage {
 
         System.out.println("\n-----Tests des méthodes acheter et vendre-----------");
 
-        Ouvrage livre3 = new Ouvrage("Musique du hasard", new Auteur("Paul", "Auster", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre3 = new Ouvrage("Musique du hasard", new Auteur("Paul", "Auster", "Etats-Unis"), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
         System.out.println(livre3);
 
         livre3.acheter(5);
@@ -72,14 +70,14 @@ public class TestOuvrage {
         System.out.println("On peut vendre 10 livres? " + livre3.vendre(10));
         System.out.println(livre3);
 
-        Ouvrage livre4 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre4 = new Ouvrage("Test", new Auteur("A", "B", "Etats-Unis"), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
 
         System.out.println("\n-----Tests de la  méthode equals()-----------");
         //Deux ouvrages égaux
-        Ouvrage livre5 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, null, 5);
-        Ouvrage livre6 = new Ouvrage("Test", new Auteur("A", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 10);
+        Ouvrage livre5 = new Ouvrage("Test", new Auteur("A", "B", "Etats-Unis"), Ouvrage.Format.PAPIER, null, 5);
+        Ouvrage livre6 = new Ouvrage("Test", new Auteur("A", "B", "Etats-Unis"), Ouvrage.Format.PAPIER, LocalDate.now(), 10);
         //Un qui ne l'est pas
-        Ouvrage livre7 = new Ouvrage("Test", new Auteur("Z", "B", new Pays("Etats-Unis", "USA")), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
+        Ouvrage livre7 = new Ouvrage("Test", new Auteur("Z", "B", "Etats-Unis"), Ouvrage.Format.PAPIER, LocalDate.now(), 5);
 
         System.out.println("Test de la méthode equals d'bibliotheque.Ouvrage:" + livre4.equals(livre5));
         System.out.println("Test de la méthode equals d'bibliotheque.Ouvrage:" + livre4.equals(livre6));
@@ -95,46 +93,48 @@ public class TestOuvrage {
         Auteur john = bibliotheque.getAuteurs().get(1);
 
         System.out.println("\n-----Test de votre méthode trouverOuvrage-----------");
-        List<Ouvrage> resultat = bibliotheque.trouverOuvrages(new Auteur("Albertine", "Tremblay", new Pays("Canada", "CAN")));
+        List<Ouvrage> resultat = bibliotheque.trouverOuvrages(new Auteur("Albertine", "Tremblay", "Canada"));
         System.out.println("Livres de albertine: " + resultat);
 
         resultat = bibliotheque.trouverOuvrages(john);
         System.out.println("Livres de john: " + resultat);
 
-        resultat = bibliotheque.trouverOuvrages(new Auteur("Jacques", "Beaulieu", new Pays("France", "FRA")));
+        resultat = bibliotheque.trouverOuvrages(new Auteur("Jacques", "Beaulieu", "France"));
         System.out.println("Livres de Jacques: " + resultat);
     }
 
     /**
-     * Test de la classe Serie (Ajout et retrait d'ouvrages)
+     * Test de la classe Pays et de son intégration dans Auteur
      *
      */
-    public void testSerie() {
-        System.out.println("\n-----  TESTS DE LA CLASSE SERIE -----");
-        // Création de la série
-        Serie maSerie = new Serie("Les Classiques");
+    public void testPaysEtAuteur() {
+        System.out.println("\n-----  TESTS DE LA CLASSE PAYS ET AUTEUR -----");
 
-        // Création auteur
-        Auteur auteur = new Auteur("Victor", "Hugo", new Pays("France", "FRA"));
+        try {
+            // Création d'un pays valide
+            Pays p1 = new Pays("Canada", "CAN");
+            System.out.println("Succès : " + p1);
 
+            // Liaison avec un auteur
+            Auteur albertine = new Auteur("Albertine", "Tremblay", p1);
+            System.out.println("Auteur créé : " + albertine.getNom() + " originaire de " + albertine.getPaysOrigine().getNom());
 
-        // Création d'ouvrages
-        Ouvrage o1 = new Ouvrage("Les Misérables", auteur);
-        Ouvrage o2 = new Ouvrage("Notre-Dame de Paris", auteur);
+            // Test de validation : Code invalide (trop court)
+            System.out.println("Tentative avec code 'CA' (devrait échouer)...");
+            new Pays("Canada", "CA");
 
-        // Ajout d'un ouvrage
-        maSerie.ajouterOuvrage(o1);
-        maSerie.ajouterOuvrage(o2);
-        System.out.println("Après ajouts : " + maSerie);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation réussie : Erreur capturée -> " + e.getMessage());
+        }
 
-        // Retrait d'un ouvrage
-        maSerie.retirerOuvrage(o1);
-        System.out.println("Après retrait de 'Les Misérables' : " + maSerie);
-
-        // Vérification du contenu
-        if (maSerie.getOuvrages().contains(o2) && !maSerie.getOuvrages().contains(o1)) {
-            System.out.println("Test de liste : OK");
+        try {
+            // Test de validation : Code invalide (minuscules)
+            System.out.println("Tentative avec code 'can' (devrait échouer)...");
+            new Pays("Canada", "can");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation réussie : Erreur capturée -> " + e.getMessage());
         }
     }
+
 }
 
