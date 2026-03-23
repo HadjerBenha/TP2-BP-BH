@@ -5,6 +5,7 @@ import java.util.List;
 
 import livres.Ouvrage;
 import livres.Auteur;
+import livres.Pays;
 
 /**
  * CoursPOO 1
@@ -102,6 +103,38 @@ public class TestOuvrage {
         System.out.println("Livres de Jacques: " + resultat);
     }
 
+    /**
+     * Test de la classe Pays et de son intégration dans Auteur
+     *
+     */
+    public void testPaysEtAuteur() {
+        System.out.println("\n-----  TESTS DE LA CLASSE PAYS ET AUTEUR -----");
+
+        try {
+            // Création d'un pays valide
+            Pays p1 = new Pays("Canada", "CAN");
+            System.out.println("Succès : " + p1);
+
+            // Liaison avec un auteur
+            Auteur albertine = new Auteur("Albertine", "Tremblay", p1);
+            System.out.println("Auteur créé : " + albertine.getNom() + " originaire de " + albertine.getPaysOrigine().getNom());
+
+            // Test de validation : Code invalide (trop court)
+            System.out.println("Tentative avec code 'CA' (devrait échouer)...");
+            new Pays("Canada", "CA");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation réussie : Erreur capturée -> " + e.getMessage());
+        }
+
+        try {
+            // Test de validation : Code invalide (minuscules)
+            System.out.println("Tentative avec code 'can' (devrait échouer)...");
+            new Pays("Canada", "can");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation réussie : Erreur capturée -> " + e.getMessage());
+        }
+    }
 
 }
 
